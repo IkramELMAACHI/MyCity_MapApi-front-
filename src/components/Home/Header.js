@@ -44,13 +44,8 @@ export default function Header() {
     <>
       <LoginForm />
       <RegisterForm />
-      {
-//  openModel
-      //  && 
-        <EditAvatar />   
-        }
-     
-
+ 
+        <EditAvatar />    
 
       <div className="container header">
         <div className="row">

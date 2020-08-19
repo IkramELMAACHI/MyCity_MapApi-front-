@@ -54,7 +54,7 @@ export default function RegisterForm() {
         <div className="add_place none" id="R-autorized">
         <div className="place_form login_form">
           <i className="fa fa-times close_window" id="R-closeau" />
-          <h3 className = 'm-0'>
+          <h3 style = {{margin : 0 }}>
           Create an Account
             <span />
           </h3>
