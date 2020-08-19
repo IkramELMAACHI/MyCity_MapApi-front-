@@ -1,0 +1,24 @@
+
+  <body class="inner_page innerpage">
+
+  installation 
+'npm install jquery'
+
+import Typekit from 'typekit';
+
+npm install 'typekit';
+install bootstrap {
+  'npm install --save bootstrap'
+}
+
+i found this error =>"./node_modules/bootstrap/dist/js/bootstrap.js
+Module not found: Can't resolve 'popper.js' in 'C:\Users\ikram\Desktop\ReactJs\react_pages-master\node_modules\bootstrap\dist\js'
+" sol=>"npm install popper.js --save"
+
+
+
+npm react-scripts
+npm react-load-script
+
+
+ load script && export script
