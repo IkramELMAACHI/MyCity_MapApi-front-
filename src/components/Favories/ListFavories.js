@@ -3,13 +3,20 @@ import axios from 'axios'
 import Favorie from './Favorie';
 class ListFavories extends Component {
 
+    
+  
     state = {
         favoris: [],
-        token : localStorage.usertoken
+        token : localStorage.usertoken,
+        latitude : localStorage.latitude,
+        longitude : localStorage.longitude,
+        accuracy : localStorage.accuracy
       }
+    
 
       componentDidMount (){
-        
+        console.log('hello');
+        console.log(this.state);
         this.getFavoriList();
     }
 

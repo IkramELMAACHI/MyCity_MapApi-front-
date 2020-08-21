@@ -10,9 +10,9 @@ class Map extends Component {
         super(props);
         this.state = {
             postion : null,
-            latitude: null,
-            longitude: null,
-            accuracy: null,
+            latitude : localStorage.latitude,
+            longitude : localStorage.longitude,
+            accuracy : localStorage.accuracy,
             places: []
         };
         this.getLocation = this.getLocation.bind(this);
@@ -33,6 +33,7 @@ class Map extends Component {
             console.log(prevProps.type +' --> '+this.props.type);
         }
     }
+    
 
     getCoordinates (position) {
         // console.log(position.coords);
@@ -46,6 +47,7 @@ class Map extends Component {
                 places: res.data.results
             }))
     }
+    
 
     // getCurrentState () {
     //     return this.state.latitude

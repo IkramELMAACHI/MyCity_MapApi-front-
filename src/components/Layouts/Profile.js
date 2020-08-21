@@ -2,18 +2,27 @@ import React, { useState, useContext, useEffect } from "react";
 import axios from 'axios'; 
 import { AiOutlineCamera } from "react-icons/ai";
 import { Spinner } from 'react-bootstrap'
-import ThemeContext from "./ThemeContext";
+import {ThemeContext} from "./ThemeContext";
 import {AvatarContext} from "../../App";
 
 export default function Profile() {
-  const { render, setRendering } = useContext(ThemeContext );
+
+
+  const { render, setRendering, setLatitude, setLongitude, setAccuracy } = useContext(ThemeContext );
   const {  openModel , setOpen} = useContext(AvatarContext );
 
   const [detail, setDetail] = useState({})
   const [show, setShow] = useState(false)
 
+  
   const AuthStr = 'Bearer '.concat(localStorage.usertoken);
   useEffect(() => {
+    getLocation();
+
+    // if(!latitude){
+    //   getLocation();
+    // }
+    
 console.log(openModel);
     axios.get('http://localhost:8000/api/details', {
       headers: {
@@ -50,6 +59,37 @@ console.log(openModel)
 
 
 }
+
+const getLocation =()=> {
+  navigator.geolocation.getCurrentPosition(getCoordinates, handleLocatioError);
+}
+
+const getCoordinates = (position) => {
+
+  setLatitude(position.coords.latitude);
+  setLongitude(position.coords.longitude);
+  setAccuracy(position.coords.accuracy);
+
+console.log(position);
+}
+
+const handleLocatioError = (error) => {
+switch(error.code) {
+    case error.PERMISSION_DENIED:
+      alert("User denied the request for Geolocation.")
+      break;
+    case error.POSITION_UNAVAILABLE:
+        alert("Location information is unavailable.")
+      break;
+    case error.TIMEOUT:
+        alert("The request to get user location timed out.")
+      break;
+    case error.UNKNOWN_ERROR:
+        alert("An unknown error occurred.")
+      break;
+  }
+}
+
   var dateFormat = require('dateformat');
 
   return (

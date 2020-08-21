@@ -4,10 +4,14 @@ import axios from 'axios'
 
 class ListPlaces extends Component {
 
+
     state = {
         places: [],
         favoris: [],
-        token: localStorage.usertoken
+        token: localStorage.usertoken,
+        latitude : localStorage.latitude,
+        longitude : localStorage.longitude,
+        accuracy : localStorage.accuracy
     
       }
     
@@ -22,7 +26,7 @@ class ListPlaces extends Component {
     
       componentDidMount() {
     
-        
+
         this.getFavoriList();
     
         this.getPlaceList();
@@ -51,7 +55,7 @@ class ListPlaces extends Component {
     
       getPlaceList = () => {
     
-        axios.get(`https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=33.5837928,-7.5247012999999985&radius=1000&type=${this.props.type}&key=AIzaSyDHekEJerPTA-RXrVuFMnw0YooLWfkFKXc&pagetoken=`)
+        axios.get(`https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${this.state.latitude},${this.state.longitude}&radius=3000&type=${this.props.type}&key=AIzaSyDHekEJerPTA-RXrVuFMnw0YooLWfkFKXc&pagetoken=`)
           .then(res => res.data).then((data) => {
     
             console.log(this.state.favoris);

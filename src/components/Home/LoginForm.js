@@ -7,29 +7,37 @@ import { Spinner } from "react-bootstrap";
 export default function LoginForm(props) {
   let history = useHistory();
 
-  const [data, setData] = useState({})
-  const [LoadButton, setLoadButton] = useState(false)
+  
+  const [data, setData] = useState({});
+
+  const [email,setEmail] = useState('');
+  const [password,setPassword] = useState('');
+  const [LoadButton, setLoadButton] = useState(false);
+
+
   const handelChange = (e) => {
-    setData({ ...data, [e.target.id]: e.target.value })
-    console.log(data);
+    e.target.id == 'email' ? setEmail(e.target.value) : setPassword(e.target.value);
   }
   const DataProfile = {
 
-    'email': data.email,
-    'password': data.password,
+    'email': email,
+    'password': password,
   }
-
+console.log(DataProfile);
   const SubLogin = async (e) => {
     e.preventDefault();
-    setLoadButton(true)
-    await axios.post(`http://localhost:8000/api/login`, DataProfile)
+    setLoadButton(true);
+    await axios.post(`http://127.0.0.1:8000/api/login`, DataProfile)
       .then(function (response) {
+        
+        
         console.log(response.data);
-        const resulta = response.data.success
+        const resulta = response.data.success;
         localStorage.setItem("usertoken", resulta.token)
         console.log(localStorage.usertoken);
         window.location.reload(true)
-        setLoadButton(false)
+        setLoadButton(false);
+
       }).catch((error) => {
         if (error.response) {
           let result = error.response.data.error
@@ -40,6 +48,9 @@ export default function LoginForm(props) {
         }
       });
   }
+
+  
+
 
   const StyleBtn = {
     display: ' flex',

@@ -3,7 +3,7 @@ import axios from 'axios';
 
 import { Redirect } from "react-router-dom";
 import { Form } from "react-bootstrap";
-import ThemeContext from "./ThemeContext";
+import {ThemeContext} from "./ThemeContext";
 import { AvatarContext } from "../../App";
 
 export default function EditAvatar() {

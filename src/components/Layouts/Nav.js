@@ -26,12 +26,6 @@ export class Nav extends Component {
                 </Link>
               </li>
               <li>
-                <Link to={'/place'}>
-                  <i className="fa fa-list" />
-                Place
-                </Link>
-              </li>
-              <li>
                 <Link to={'/favorites'}>
                   <i className="fa fa-th" />
                   Favoris
