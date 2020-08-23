@@ -80,13 +80,14 @@ function App() {
               <Route path='/services' exact>
                 <Lists />
               </Route>
+              
 
               <Route path='/favorites' >
                 <Favoris />
               </Route>
 
               <Route path='/map/:id' component={Road} />
-              <Route path='/services/:id' component={SinglePlace} />
+              <Route path='/services/:id' component={SinglePlace} exact/>
               <Route path='/' exact >
               < Home />
             </Route>

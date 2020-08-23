@@ -9,15 +9,11 @@ export class MainPlace extends Component {
 
     state = {
         place: {},
-        reviews: []
+        reviews: [],
+        image : ''
     }
 
-    param = {
-        headers: {
-            'Access-Control-Allow-Origin': '*',
-            'x-requested-with': `XMLHttpRequest`,
-        },
-    }
+
 
     componentDidMount() {
         
