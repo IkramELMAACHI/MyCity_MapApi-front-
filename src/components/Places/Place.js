@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom'
+import Rating from '../Layouts/Rating';
 
 class Place extends Component {
 
@@ -10,7 +11,10 @@ class Place extends Component {
             type : this.props.type,
             vicinity : this.props.place.vicinity === undefined ? '-' : this.props.place.vicinity,
             rating : this.props.place.rating === undefined ? '-' : this.props.place.rating,
-            open_now : this.props.place.opening_hours  === undefined ? '-' : this.props.place.opening_hours.open_now
+            open_now : this.props.place.opening_hours  === undefined ? '-' : this.props.place.opening_hours.open_now,
+            // photo :  this.props.place.photos === undefined ?   this.props.place.icon  :  ''
+            //  `https://maps.googleapis.com/maps/api/place/photo?maxwidth=${200}&photoreference=${this.props.place.photos[0].photo_reference}&key=AIzaSyDHekEJerPTA-RXrVuFMnw0YooLWfkFKXc` ,
+
         },
         active : 'false'
     }
@@ -19,6 +23,12 @@ class Place extends Component {
         this.setState({
             active : this.props.place.active
         })
+        console.log('this.props.place.photos[0].photo_reference');
+        // console.log(this.props.place.photos[0] )
+        console.log('this.props.place' )
+        console.log(this.props.photo)
+
+
     }
 
     handleAddFavori(){
@@ -43,16 +53,17 @@ class Place extends Component {
         return (
             <div className="pg style_list">
             <div className="con">
-              <img src="img/pl3.jpg" alt />
+                
+              <img src={`${this.props.photo}`} alt />
               <div className="content_li">
-              <Link to={`/services/${this.props.place.place_id}`}><h2 >Title : {this.props.place.name}</h2></Link>
+              <Link to={`/services/${this.props.place.place_id}`}><h2 >  {this.props.place.name}</h2></Link>
               <span></span>
                 <span>
                 Adress : {this.props.place.vicinity}
                 </span>
-                <span>
-                rating : {this.props.place.rating}
-                </span>
+                
+                <Rating rating = {this.props.place.rating} />
+                 
                 <button 
                     className={"m-2 btn "+ (this.state.active == 'false' ? 'btn-success' : 'btn-danger')}
                      onClick={this.state.active == 'false' ? this.handleAddFavori.bind(this) : this.hundleDeleteFavori.bind(this)}>

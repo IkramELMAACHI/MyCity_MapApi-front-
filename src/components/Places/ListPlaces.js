@@ -57,7 +57,7 @@ class ListPlaces extends Component {
     
         axios.get(`https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${this.state.latitude},${this.state.longitude}&radius=3000&type=${this.props.type}&key=AIzaSyDHekEJerPTA-RXrVuFMnw0YooLWfkFKXc&pagetoken=`)
           .then(res => res.data).then((data) => {
-    
+    console.log(data);
             console.log(this.state.favoris);
             let favlis = this.state.favoris;
             let upPlaces = data.results;
@@ -73,7 +73,8 @@ class ListPlaces extends Component {
             });
     
             this.setState({
-              places: upPlaces
+              places: upPlaces,
+              
             });
     
             
@@ -126,7 +127,11 @@ class ListPlaces extends Component {
 
   render() {
     return this.state.places.map((place) => (
-        <Place key={place.id} place={place} type={this.props.type} addFav={this.addFavori.bind(this)} delFav={this.deleteFavori.bind(this)} coord={'33.5837928,-7.5247012999999985&'+place.geometry.location.lat+','+place.geometry.location.lng} />
+      // place.photos[0]  ?
+      //   <Place key={place.id} place={place} photo = {  place.photos[0]  } type={this.props.type} addFav={this.addFavori.bind(this)} delFav={this.deleteFavori.bind(this)} coord={'33.5837928,-7.5247012999999985&'+place.geometry.location.lat+','+place.geometry.location.lng} />
+
+      // :
+        <Place key={place.id} place={place} photo = {   place.icon } type={this.props.type} addFav={this.addFavori.bind(this)} delFav={this.deleteFavori.bind(this)} coord={'33.5837928,-7.5247012999999985&'+place.geometry.location.lat+','+place.geometry.location.lng} />
       ));
   }
 }
