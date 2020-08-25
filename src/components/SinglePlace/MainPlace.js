@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 // import Detail from './Detail'
 import ListReviews from './ListReviews'
 import axios from 'axios'
-import Parser from 'html-react-parser';
+// import Parser from 'html-react-parser';
 import { Spinner } from 'react-bootstrap';
 import Images from './Images';
 const RenderHTML = (props) => (<span dangerouslySetInnerHTML={{ __html: props.HTML }}></span>)
@@ -81,13 +81,13 @@ export class MainPlace extends Component {
                     } else if (data.result.opening_hours.periods.length == 6) {
                         console.log('6');
 
-                        if (data.result.opening_hours.periods[0].close == data.result.opening_hours.periods[5].close) {
+                        if (data.result.opening_hours.periods[0].close.time == data.result.opening_hours.periods[5].close.time) {
                             this.setState({
                                 periods: {
                                     week: false,
                                     days: "lundi-samedi",
-                                    hours_open: data.result.opening_hours.periods[0].open,
-                                    hours_close: data.result.opening_hours.periods[0].close
+                                    hours_open: data.result.opening_hours.periods[0].open.time,
+                                    hours_close: data.result.opening_hours.periods[0].close.time,
                                 }
                             });
                         } else {
@@ -96,11 +96,11 @@ export class MainPlace extends Component {
                                 periods: {
                                     week: true,
                                     days: "lundi-vendredi",
-                                    hours_open: data.result.opening_hours.periods[0].open,
-                                    hours_close: data.result.opening_hours.periods[0].close,
+                                    hours_open: data.result.opening_hours.periods[0].open.time,
+                                    hours_close: data.result.opening_hours.periods[0].close.time,
                                     week: 'samedi',
-                                    week_open: data.result.opening_hours.periods[5].open,
-                                    week_close: data.result.opening_hours.periods[5].close,
+                                    week_open: data.result.opening_hours.periods[5].open.time,
+                                    week_close: data.result.opening_hours.periods[5].close.time,
                                 }
                             });
                         }
@@ -123,6 +123,17 @@ export class MainPlace extends Component {
         var parser = new DOMParser();
         var htmlDoc = parser.parseFromString(this.state.photo, 'text/xml');
         console.log(htmlDoc);
+    }
+
+     formatHours = (o,c)=>{
+        
+        try{
+            return `${o[0]}${o[1]}:${o[2]}${o[3]} - ${c[0]}${c[1]}:${c[2]}${c[3]}`;
+        }
+        catch{
+            return `08:00-18:00`;
+        }
+        
     }
  
     render() {
@@ -164,10 +175,10 @@ export class MainPlace extends Component {
                                                 <span>
                                                     <i className="fa fa-phone" /> {this.state.place.formatted_phone_number ? this.state.place.formatted_phone_number : '0522222698'}
                                                 </span>
-                                                <span>
+                                                {/* <span>
                                                     <i className="fa fa-globe" />
                                                     <a href="http://matart.ru">http://matart.ru</a>
-                                                </span>
+                                                </span> */}
                                             </div>
                                             <div className="bubble">
                                                 <div>
@@ -183,7 +194,7 @@ export class MainPlace extends Component {
                                                                     Ouvert: <b>{this.day}</b>
                                                                 </li>
                                                                 <li>
-                                                                    Hours: <b> {`${this.opening}` + ' - ' + this.closing} </b>
+                                                                    Hours: <b> {this.formatHours(this.state.periods.hours_open.time,this.state.periods.hours_close.time)} </b>
                                                                 </li>
                                                             </>
                                                             :
@@ -207,9 +218,9 @@ export class MainPlace extends Component {
                                     {/* <div className="reviews"> */}
                                 </>
                                 :
-                                <div className = ' text-center p-5'>
+                                <div className = ' text-center p-5' >
                                     
-                                     <h2> Loading Details ..... </h2>
+                                     <h2 > Loading Details ..... </h2>
                                 </div>
                                 // 
                             }

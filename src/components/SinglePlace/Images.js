@@ -34,7 +34,7 @@ export default class Images extends Component {
         <div className = '  d-flex justify-centent-between'  >
          
               
-                {this.state.photos.slice(0, 4).map(photo =>
+                {this.state.photos && this.state.photos.slice(0, 4).map(photo =>
               <div className=" col-3  p-3"> 
             <img   style = {{width : '200px' , height : '200px', padding : '10px'}} src= {`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${photo.photo_reference}&key=AIzaSyDHekEJerPTA-RXrVuFMnw0YooLWfkFKXc`} alt=""/>
             </div>
